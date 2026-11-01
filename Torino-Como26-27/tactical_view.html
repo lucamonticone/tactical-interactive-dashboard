@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Torino-Como Tactical analysis. Lavagna tattica interattiva."><title>Torino-Como Tactical View</title><style>:root{color-scheme:light;--bg:#f7f8f4;--ink:#202e29;--muted:#637267;--line:#dde4dc;--soft:#e8eee5;--green:#187359;--pitch:#e2ebdf}
+*{box-sizing:border-box}html,body{height:100%;margin:0}body{font:13px/1.4 "Segoe UI",Inter,system-ui,sans-serif;color:var(--ink);background:var(--bg)}button,select,input,summary{font:inherit;color:inherit}button,summary{border:0;border-radius:4px;background:transparent;padding:8px 10px;cursor:pointer;white-space:nowrap}button{font-weight:600}button:hover,summary:hover{background:var(--soft)}button:disabled{opacity:.35;cursor:default}button[aria-pressed=true]{background:#dfe9dc;color:#244b38}button:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #226c95;outline-offset:3px}[hidden]{display:none!important}.app{height:100dvh;max-width:1920px;margin:auto;padding:0 20px;display:flex;flex-direction:column;gap:0}.header{height:68px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;gap:18px}h1{font-size:21px;line-height:1.2;letter-spacing:-.025em;font-weight:600;margin:0}.layers{display:flex;align-items:center;gap:2px}.layers button,.layers summary{font-size:12px;padding:8px 9px}.tools{position:relative}summary{list-style:none}summary::-webkit-details-marker{display:none}summary:after{content:' ⌄';color:var(--muted)}.tool-menu{position:absolute;right:0;top:38px;width:226px;max-height:calc(100dvh - 140px);overflow:auto;padding:10px;background:#fcfdf9;border:1px solid var(--line);border-radius:5px;box-shadow:0 8px 24px #20352912;z-index:10;display:grid;gap:3px}.tool-menu button{text-align:left;white-space:normal;padding:8px;font-size:12px}.tool-menu label{display:block;font-size:12px;padding:6px 8px}.tool-menu select{width:100%;padding:6px;border:1px solid var(--line);background:var(--bg)}.tool-menu hr{width:100%;border:0;border-top:1px solid var(--line);margin:5px 0}.pitch-wrap{flex:1;min-height:0;background:var(--pitch);border-radius:4px;overflow:hidden;display:flex}.field-space{width:100%;min-height:0;padding:10px;display:flex;align-items:center;justify-content:center}.field{display:block;width:100%;height:100%;touch-action:none;user-select:none}.mark{stroke:white;stroke-width:1.5;fill:none}.p{cursor:grab;outline:none}.token{stroke:white;stroke-width:2}.p:hover .token,.p:focus-visible .token{stroke:#202e29;stroke-width:3}.ring{fill:none;stroke:#223a30;stroke-width:1.5;opacity:0}.selected .ring{opacity:1}.initial{font-size:11px;font-weight:700;fill:white;text-anchor:middle;dominant-baseline:central;pointer-events:none}.name{font-weight:650;fill:#213a2c;paint-order:stroke;stroke:#edf3e9;stroke-width:5px;stroke-linejoin:round;text-anchor:middle;display:none;pointer-events:none}.p:hover .name,.p:focus-visible .name,.names .name{display:block}#ballLayer,#motionLayer,#zoneLayer{pointer-events:none}.lane-path{fill:none;stroke-width:2.4;pointer-events:none;opacity:.9;vector-effect:non-scaling-stroke;stroke-linecap:round}.lane-path.blocked{stroke-dasharray:2 5;opacity:.78}.lane-path.risk{stroke-dasharray:7 5}.active-pass{fill:none;stroke:#226c95;stroke-width:3;vector-effect:non-scaling-stroke}.motion-trace{fill:none;stroke-width:1.7;stroke-dasharray:4 4;opacity:.5;vector-effect:non-scaling-stroke}.transport{min-height:68px;display:flex;align-items:center;gap:20px;flex-shrink:0}.playback{display:flex;align-items:center;gap:5px;flex:1;min-width:0}.playback select{background:transparent;border:0;width:78px;font-size:12px;padding:7px 0}.icon{display:grid;place-items:center;width:30px;height:32px;padding:0;font-size:18px;flex:none}#playPause{background:var(--ink);color:white;min-width:86px;height:34px;font-size:12px}.time{font-size:11px;font-variant-numeric:tabular-nums;min-width:44px;text-align:center}.seek{flex:1;min-width:55px;accent-color:#344b3d}#speed{font-size:11px;min-width:32px;padding:8px 3px}.scenario-controls{display:flex;align-items:center;gap:2px}.scenario{font-size:12px;padding:8px 10px}.snapshot-actions{display:flex;gap:2px;padding-left:8px;border-left:1px solid var(--line)}.snapshot-actions button{width:32px;height:32px;padding:0;display:grid;place-items:center;font-size:17px}.milla-actions{position:relative;flex:none}.milla-actions>summary{font-size:12px}.milla-actions .tool-menu{top:auto;bottom:42px;left:auto;right:0;width:160px}.notice{font-size:11px;color:var(--muted);padding:6px 8px}.options{display:grid;grid-template-columns:1fr 1fr;gap:2px}.options button{font-size:11px;padding:6px!important}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}input[type=file]{display:none}
+@media(min-width:1800px){.app{padding:0 32px}}@media(max-width:1050px){.transport{gap:10px;flex-wrap:wrap;padding:10px 0}.playback{flex-basis:100%}.scenario-controls{margin-left:auto}.header{height:62px}h1{font-size:20px}}@media(max-width:560px){.app{padding:0 10px}.header{height:74px;gap:6px}h1{font-size:17px;max-width:190px}.layers button,.layers summary{font-size:10px;padding:7px 6px}.field-space{padding:4px}.transport{gap:6px;padding:8px 0}.playback{display:grid;grid-template-columns:65px 28px 28px minmax(74px,1fr) 28px 43px 30px;gap:3px}.playback select{width:65px;font-size:11px}.icon{width:28px}.time{font-size:10px;min-width:0}#playPause{min-width:0;width:100%;font-size:11px}.seek{grid-column:1/-1;grid-row:2;width:100%;margin:4px 0}.scenario-controls{margin:0 auto;gap:1px}.scenario{font-size:11px;padding:7px 8px}.snapshot-actions{padding-left:4px}.snapshot-actions button{width:26px;height:30px}.milla-actions>summary{font-size:11px;padding:6px}.tool-menu{width:218px}.milla-actions{margin-left:auto}}
+</style></head><body>
+<main class="app" id="app">
+<header class="header"><h1 id="pageTitle">Torino-Como Tactical View</h1><div class="layers"><button id="lanesToggle" aria-pressed="true">Linee</button><button id="namesToggle" aria-pressed="false">Nomi</button><details class="tools" id="tools"><summary>Strumenti</summary><div class="tool-menu"><button id="pivotBtn">Perrone basso</button><button id="prepare">Prepara confronto</button><select id="pressing" aria-label="Pressione"><option value="correct">Coordinata</option><option value="badVl">Errore Vlašić</option><option value="badFj">Errore Fitz-Jim</option></select><div id="coverSlot"></div><hr><button id="zonesToggle" aria-pressed="false">Zone</button><label><input id="allLanes" type="checkbox"> Tutte le linee</label><label><input id="arrows" type="checkbox" checked> Tracce</label><hr><button id="exportPitch">PNG campo</button><button id="exportFrame">PNG con titolo</button><button id="exportJson">Esporta JSON</button><button id="importJson">Importa JSON</button><button id="saveLocal">Salva</button><button id="loadLocal">Carica</button></div></details></div></header>
+<div class="pitch-wrap"><div class="field-space"><svg id="field" class="field" viewBox="0 0 1130 740" role="group" aria-label="Lavagna tattica 11 contro 11. Clicca un giocatore Como per passare; trascina per riposizionare."><defs><pattern id="grass" width="188.33" height="680" patternUnits="userSpaceOnUse"><rect width="188.33" height="680" fill="#e3ecdf"/><rect width="94.165" height="680" fill="#dce7d7"/></pattern></defs><rect x="40" y="30" width="1050" height="680" fill="url(#grass)"/><g class="mark"><rect x="40" y="30" width="1050" height="680"/><path d="M565 30V710"/><circle cx="565" cy="370" r="91.5"/><circle cx="565" cy="370" r="2" fill="white"/><path d="M40 168.4H205V571.6H40M1090 168.4H925V571.6H1090M40 278.4H95V461.6H40M1090 278.4H1035V461.6H1090"/><path d="M205 297A91.5 91.5 0 0 1 205 443M925 297A91.5 91.5 0 0 0 925 443"/><circle cx="150" cy="370" r="2" fill="white"/><circle cx="980" cy="370" r="2" fill="white"/></g><g id="zoneLayer"></g><g id="laneLayer"></g><g id="motionLayer"></g><g id="players"></g><g id="ballLayer"><circle id="ball" r="6" fill="white" stroke="#203a30" stroke-width="2"/><circle id="ballDot" r="2" fill="#203a30"/></g></svg></div></div>
+<footer class="transport" aria-label="Comandi"><div class="playback"><select id="mode" aria-label="Modalità"><option value="manual">Manuale</option><option value="guided">Guidato</option></select><button class="icon" id="reset" aria-label="Reset" title="Reset · R">↺</button><button class="icon" id="prev" aria-label="Indietro" title="Indietro · ←">‹</button><button id="playPause" aria-label="Avvia">▶ Avvia</button><button class="icon" id="next" aria-label="Avanti" title="Avanti · →">›</button><span id="time" class="time">00:00.0</span><input id="timeline" class="seek" type="range" min="0" max="1000" step="1" value="0" disabled aria-label="Timeline"><button id="speed" title="Velocità">1×</button></div>
+<details id="millaActions" class="milla-actions" hidden><summary>Milla</summary><div class="tool-menu"><button data-action="nico">Nico</button><button data-action="back">Perrone</button><button data-action="carry">Conduci</button><button data-action="wide">Esterno</button><button data-action="third">Terzo uomo</button></div></details>
+<div class="scenario-controls" role="group" aria-label="Bragança"><button class="scenario" data-scenario="protect" aria-pressed="true">Protegge Nico</button><button class="scenario" data-scenario="followMilla" aria-pressed="false">Segue Milla</button><button class="scenario" data-scenario="followNico" aria-pressed="false">Segue Nico</button><div class="snapshot-actions"><button id="savePoint" aria-label="Salva posizione" title="Salva posizione">⛶</button><button id="restorePoint" aria-label="Ripristina posizione" title="Ripristina posizione" disabled>↩</button></div></div></footer>
+<span class="sr-only" id="liveState" aria-live="polite"></span></main><input id="importFile" type="file" accept="application/json,.json">
+<script>
+(()=>{'use strict';
+// Roster, misure e regole desired derivati da V9. Rendering e clock sono V10.
+const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg',TITLE='Torino-Como Tactical View';
+const defsC=[['Sánchez',6,34,'GK'],['Kempf',24,18,'CB'],['Perrone',38,31,'PIV'],['Ramón',24,50,'CB'],['Valle',35,10,'FB'],['Couto',35,58,'FB'],['Milla',46,39,'CM'],['Caqueret',68,15,'W'],['Da Cunha',68,53,'W'],['Nico Paz',66,33,'AM'],['Douvikas',87,34,'ST']];
+const defsT=[['Perri',101,34,'GK'],['Coco',79,17,'CB'],['Ismajli',80,34,'CB'],['Comuzzo',79,52,'CB'],['Belghali',68,8,'WB'],['Cacciamani',68,60,'WB'],['Vlašić',54,19,'CM'],['Bragança',54,34,'CM'],['Fitz-Jim',54,49,'CM'],['Adams',40,25,'ST'],['Simeone',40,44,'ST']];
+const COLORS={free:'#187359',risk:'#966312',blocked:'#ad3549'},LABELS={free:'Disponibile*',risk:'Contesa',blocked:'Schermata'},SCENES={protect:'Protegge Nico',followMilla:'Segue Milla',followNico:'Segue Nico'};
+const PARAM={ballSpeed:18,release:.12,defenderSpeed:4.8,reaction:.32,reach:.85,collision:1.2,control:.18};
+const clone=o=>JSON.parse(JSON.stringify(o)),clamp=(n,a,b)=>Math.max(a,Math.min(b,n)),mix=(a,b,u)=>a+(b-a)*u,dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y),ease=u=>u*u*(3-2*u);
+const freeze=o=>{if(o&&typeof o==='object'){Object.freeze(o);Object.values(o).forEach(v=>{if(v&&typeof v==='object'&&!Object.isFrozen(v))freeze(v)})}return o};
+const make=(defs,team)=>defs.map((d,id)=>({id,team,name:d[0],role:d[3],base:{x:d[1],y:d[2]},x:d[1],y:d[2],tx:d[1],ty:d[2],angle:team==='c'?0:Math.PI,pinned:false}));
+const initial=()=>({C:make(defsC,'c'),T:make(defsT,'t'),owner:1,flight:null,pivot:false,scenario:'protect',pressing:'correct',decision:false,millaDrop:false,nicoShift:false,time:0,label:'Clicca un giocatore blu. Un clic, un passaggio; poi la lavagna si ferma.',action:'idle'});
+let S=initial(),controller={mode:'manual',status:'idle',clip:null,elapsed:0,speed:1,stepEnd:null,pendingScenario:null},checkpoint=null,comparisonBase=null,snapshotSerial=0,history=[clone(S)],historyIndex=0,comparisonRuns={},view='explore',selected=null,showLines=true,showZones=false,showNames=false,showAll=false,showArrows=true,dirty=true,uiDirty=true,last=0,lastUI=0,drag=null,lastComparisonStart=null;
+const smooth=u=>u*u*u*(u*(6*u-15)+10);
+function movementControl(a,b,key,id){const d=dist(a,b),bend=d>.25?Math.min(.9,d*.085)*(key==='T'?(id===6?-1:id===8?1:id===7?-.6:0):(id===9?-1:id===6?1:0)):0;return{x:clamp((a.x+b.x)/2-(b.y-a.y)/(d||1)*bend,1,104),y:clamp((a.y+b.y)/2+(b.x-a.x)/(d||1)*bend,1,67)}}
+function movementPoint(a,b,key,id,u){const c=movementControl(a,b,key,id),v=1-u;return{x:v*v*a.x+2*v*u*c.x+u*u*b.x,y:v*v*a.y+2*v*u*c.y+u*u*b.y}}
+let texts={title:TITLE,caption:'',source:''};
+// Fullback trap: close the forward corridors with real positions, leaving the recycle.
+function wideTrap(s,ball){
+ if(ball.x<20||ball.x>62||ball.y>16&&ball.y<52)return null;
+ const sign=ball.y<34?-1:1,n=s.C[9],m=s.C[6],per=s.C[2],dx=n.x-ball.x,dy=n.y-ball.y,d=Math.hypot(dx,dy)||1;
+ const px=clamp(ball.x+(n.x-ball.x)*.4,52.5,56.3),t=clamp((px-ball.x)/(dx||1),.1,.9),screen={x:mix(ball.x,n.x,t),y:mix(ball.y,n.y,t)};
+ const bad=(sign<0&&s.pressing==='badVl')||(sign>0&&s.pressing==='badFj');
+ // Wrong angle: the ball-side midfielder is pulled inside instead of closing the diagonal.
+ const wrong={x:screen.x+sign*dy/d*7,y:screen.y-sign*dx/d*7};
+ const coverT=clamp((57-ball.x)/(dx||1),.2,.85);
+ return{sign,bad,mid:sign<0?6:8,striker:sign<0?9:10,screen,badScreen:wrong,
+  millaScreen:{x:mix(ball.x,m.x,.5),y:mix(ball.y,m.y,.5)},
+  perroneScreen:{x:per.x+(s.pivot?7:5),y:per.y-sign*2.5},
+  centralCover:bad?{x:mix(ball.x,n.x,coverT),y:mix(ball.y,n.y,coverT)}:{x:54.3,y:34+sign*6.2}};
+}
+function desired(p,s,ball,context={}){
+ const side=clamp((ball.y-34)/23,-1,1),top=ball.y<27,bottom=ball.y>41;
+ if(p.pinned)return{x:p.x,y:p.y};
+ if(p.team==='c'){
+  if(p.id===0)return{x:6,y:34};
+  if(p.id===2){const wide=ball.x>=20&&ball.x<=62&&(ball.y<=16||ball.y>=52);return{x:s.pivot?wide?26.5:24:wide?39.5:38,y:s.pivot?34:31}}
+  if(p.id===1||p.id===3)return clone(p.base);
+  if(p.id===4||p.id===5)return{x:s.pivot?49:35,y:p.id===4?10:58};
+  if(p.id===6){
+   if(s.decision&&s.scenario==='followNico')return{x:51.5,y:34};
+   if(s.decision&&s.scenario==='followMilla'&&!wideTrap(s,ball)){if(context.holder<=5)return{x:43.5,y:top?43:bottom?25:44};return{x:p.x,y:p.y}}
+   return{x:s.millaDrop?43.5:46,y:s.millaDrop?39.8:38.6};
+  }
+  if(p.id===9){
+   if(s.decision&&s.scenario==='followMilla'&&!wideTrap(s,ball)){if(context.holder<=5)return{x:60.5,y:top?25:bottom?43:34};return{x:p.x,y:p.y}}
+   return{x:s.nicoShift?67.1:66.2,y:s.nicoShift?(top?30.9:bottom?35.1:32.4):32.8};
+  }
+  // An optional receiving movement exploits the wrong diagonal: a winger comes short.
+  // It remains a real trajectory; availability is still decided only by classify().
+  if(p.id===7||p.id===8)return{x:(p.id===7&&s.pressing==='badVl'&&top||p.id===8&&s.pressing==='badFj'&&bottom)?55.5:68,y:p.id===7?14:54};
+  return{x:87,y:34};
+ }
+ const trap=wideTrap(s,ball);
+ if(trap){
+  if(p.id===trap.mid)return trap.bad?trap.badScreen:trap.screen;
+  if(p.id===trap.striker){if(s.decision&&s.scenario==='followNico')return{x:ball.x>=45?41.5:36.4,y:trap.sign>0?46.8:23.2};return trap.millaScreen}
+  if(p.id===(trap.striker===9?10:9))return trap.perroneScreen;
+  if(p.id===7){if(s.scenario==='followNico'&&s.decision){const n=context.markedNico||s.C[9];return{x:n.x-5.6,y:n.y+1.1}}if(s.scenario==='followMilla'&&s.decision)return{x:s.C[6].x+3.6,y:s.C[6].y+.3};return trap.centralCover}
+ }
+ if(s.decision&&s.scenario==='followMilla'&&!trap){
+  if(p.id===6){if(top)return{x:46.5,y:12};if(!bottom)return{x:49,y:18.5}}
+  if(p.id===8){if(bottom)return{x:46.5,y:56};if(!top)return{x:49,y:49.5}}
+  if(p.id===9&&top)return{x:35.5,y:28.7+side*1.2};
+  if(p.id===10&&bottom)return{x:35.5,y:39.3+side*1.2};
+ }
+ if(p.id===0)return{x:101,y:34};
+ if([1,2,3].includes(p.id))return{x:p.base.x-(ball.x<51?1.9:.3),y:clamp(p.base.y+side*1.25,8,60)};
+ if(p.id===4)return{x:68-(ball.x<51?1.8:.35),y:top?11.5:bottom?8.8:10};
+ if(p.id===5)return{x:68-(ball.x<51?1.8:.35),y:bottom?56.5:top?59.2:58};
+ if(p.id===6){if(s.pressing==='badVl'&&top)return{x:51,y:26.2};if(top&&ball.x>28)return{x:53.2,y:17.7};if(top)return{x:52.6,y:19.5};return{x:54.1,y:19.4+side*1.15}}
+ if(p.id===8){if(s.pressing==='badFj'&&bottom)return{x:50.4,y:41.6};if(bottom&&ball.x>28)return{x:50.1,y:48.1};if(bottom)return{x:52.8,y:48.3};return{x:54,y:48.9+side*1.15}}
+ if(p.id===7){if(s.scenario==='followNico'&&s.decision){const n=context.markedNico||s.C[9];return{x:n.x-5.6,y:n.y+1.1}}if(s.scenario==='followMilla'&&s.decision)return{x:s.C[6].x+3.6,y:s.C[6].y+.3};return{x:54.3,y:34+side*1.3}}
+ if(p.id===9){if(s.pivot)return{x:35.5,y:28.7+side*1.2};return{x:top&&ball.x<49?36.3:39.2,y:top?23.2:25+side*1.2}}
+ if(p.id===10){if(s.pivot)return{x:35.5,y:39.3+side*1.2};if(bottom&&ball.x<49)return{x:36.4,y:46.8};if(ball.y>=28&&ball.y<=40)return{x:37.6,y:43.7};return{x:39.4,y:45+side*1.3}}
+ return{x:p.x,y:p.y};
+}
+function ballPos(s=S){if(s.flight){let f=s.flight;return{x:mix(f.start.x,f.end.x,f.progress),y:mix(f.start.y,f.end.y,f.progress)}}return{x:s.C[s.owner].x,y:s.C[s.owner].y}}
+// One classifier feeds SVG, sidebar, exports and contextual decisions. No scene-dependent colours.
+function classify(a,b,defenders=S.T){
+ const length=dist(a,b);if(length<.05)return{kind:'blocked',length,minDistance:0,margin:-1,by:'Ricevitore sovrapposto',ballTime:0,receiverMargin:-1};
+ let minDistance=Infinity,margin=Infinity,by='',geomBy='';const total=PARAM.release+length/PARAM.ballSpeed;
+ for(const d of defenders){
+  const projection=clamp(((d.x-a.x)*(b.x-a.x)+(d.y-a.y)*(b.y-a.y))/(length*length),.05,1);
+  const closest={x:mix(a.x,b.x,projection),y:mix(a.y,b.y,projection)},clearance=dist(d,closest);
+  if(clearance<minDistance){minDistance=clearance;geomBy=d.name}
+  // Temporal interception samples exclude the release point and include receiver access.
+  for(let j=1;j<=20;j++){const u=.05+.95*j/20,pt={x:mix(a.x,b.x,u),y:mix(a.y,b.y,u)},arrival=PARAM.reaction+Math.max(0,dist(d,pt)-PARAM.reach)/PARAM.defenderSpeed,ballArrival=PARAM.release+length*u/PARAM.ballSpeed,m=arrival-ballArrival;if(m<margin){margin=m;by=d.name}}
+ }
+ const receiverMargin=Math.min(...defenders.map(d=>PARAM.reaction+Math.max(0,dist(d,b)-PARAM.reach)/PARAM.defenderSpeed-total-PARAM.control));
+ let kind=minDistance<=PARAM.collision||margin<=-.1||receiverMargin<=-.1?'blocked':margin<.3||receiverMargin<.3?'risk':'free';
+ return{kind,length,minDistance,margin,receiverMargin,by:minDistance<=PARAM.collision?geomBy:by,ballTime:total};
+}
+function candidates(s=S){return s.C.filter(p=>p.id!==s.owner).map(p=>({id:p.id,name:p.name,...classify(s.C[s.owner],p,s.T)}))}
+function salient(s=S){if(showAll)return candidates(s);let ids=s.owner===1?[2,4,7,9]:s.owner===3?[2,5,8,9]:s.owner===2?[1,3,6,9,4,5]:s.owner===6?[9,2,7,8,10]:s.owner===4?[7,1,2,9]:s.owner===5?[8,3,2,9]:[2,6,9,7,8];return candidates(s).filter(p=>[...ids,6,9].includes(p.id))}
+
+function assertState(s){
+ if(s.C.length!==11||s.T.length!==11)throw Error('Roster diverso da 11v11');
+ if(!Number.isInteger(s.owner)||s.owner<0||s.owner>10)throw Error('Portatore non valido');
+ for(const [team,defs] of [[s.C,defsC],[s.T,defsT]])team.forEach((p,i)=>{if(p.id!==i||p.name!==defs[i][0])throw Error('Identità roster non valida');for(const k of ['x','y','tx','ty','angle'])if(!Number.isFinite(p[k]))throw Error('Coordinate non finite');if(p.x<0||p.x>105||p.y<0||p.y>68||p.tx<0||p.tx>105||p.ty<0||p.ty>68)throw Error('Giocatore fuori campo')});
+ if(!Number.isFinite(s.time)||s.time<0)throw Error('Tempo non valido');
+ if(s.flight){const f=s.flight;if(f.from!==s.owner||!Number.isInteger(f.to)||f.to<0||f.to>10||f.to===f.from||!Number.isFinite(f.progress)||f.progress<0||f.progress>1)throw Error('Possesso/volo incoerente');for(const pt of [f.start,f.end])if(!pt||!Number.isFinite(pt.x)||!Number.isFinite(pt.y)||pt.x<0||pt.x>105||pt.y<0||pt.y>68)throw Error('Palla fuori campo')}
+ if(!Object.hasOwn(SCENES,s.scenario)||!['correct','badVl','badFj'].includes(s.pressing))throw Error('Scenario non valido');return true;
+}
+function segment(start,action){
+ const a=clone(start),b=clone(start);b.flight=null;b.action=action.kind;
+ if(action.resetDefence){b.scenario='protect';b.decision=false;b.millaDrop=false;b.nicoShift=false;b.pressing='correct'}
+ if(action.kind==='pivot')b.pivot=action.value??!a.pivot;
+ if(action.kind==='scenario'){b.scenario=action.value;b.decision=true;b.millaDrop=true;b.nicoShift=true}
+ if(action.kind==='press')b.pressing=action.value;
+ const from=a.owner,to=action.to,pass=action.kind==='pass'&&to!==from;
+ const context={holder:pass?to:a.owner};if(action.kind==='support')context.markedNico=clone(a.C[9]);
+ let ref=pass?clone(a.C[to]):ballPos(a);
+ // Two passes resolve the moving references (Milla / Nico) before defenders choose targets.
+ for(const p of b.C){const d=desired(p,b,ref,context);p.x=d.x;p.y=d.y}
+ if(action.kind==='support'){
+  const m=a.C[6],per={x:clamp(m.x-7.5,20,55),y:clamp(m.y+(m.y>=34?-5.5:5.5),22,46)};
+  const pockets=[{x:60.5,y:26},{x:60.5,y:42},{x:62,y:30},{x:62,y:39}];
+  pockets.sort((x,y)=>{const score=n=>{const l=classify(per,n,a.T);return l.margin+Math.min(l.minDistance,10)*.06};return score(y)-score(x)});
+  Object.assign(b.C[2],per,{pinned:true});Object.assign(b.C[9],pockets[0],{pinned:true});
+ }
+ if(pass)ref=clone(b.C[to]);
+ if(action.kind==='carry'){b.C[6].x=clamp(a.C[6].x+5.5,1,104);b.C[6].y=a.C[6].y;b.C[6].pinned=true;ref=clone(b.C[6])}
+ for(const p of b.T){const d=desired(p,b,ref,context);p.x=d.x;p.y=d.y}
+ // With Milla followed, the other midfielders compensate late, by a modest amount.
+ if(b.decision&&b.scenario==='followMilla'&&!wideTrap(b,ref))for(const i of [6,8])if(!b.T[i].pinned){b.T[i].x+=.8;b.T[i].y+=i===6?1.5:-1.5}
+ let maxMove=0;for(const key of ['C','T'])b[key].forEach((p,i)=>{p.x=clamp(p.x,1,104);p.y=clamp(p.y,1,67);p.tx=p.x;p.ty=p.y;let old=a[key][i],d=dist(old,p);maxMove=Math.max(maxMove,d);p.angle=d>.02?Math.atan2(p.y-old.y,p.x-old.x):old.angle});
+ if(pass)b.owner=to;
+ const ballDuration=pass?clamp(dist(ballPos(a),b.C[to])/PARAM.ballSpeed,.55,3.8):0;
+ const duration=action.duration??Math.max(action.kind==='scenario'?4.2:action.kind==='pivot'?3.6:2.8,ballDuration+.8,maxMove/(action.kind==='scenario'?4.2:4.8)*1.875+.45);
+ b.time=a.time+duration;b.label=action.label??(pass?`${a.C[from].name} → ${a.C[to].name}. Reazione collettiva, poi fermo.`:action.kind==='pivot'?b.pivot?'Perrone scende dalla mediana. La prima linea a tre è una rotazione.':'Perrone risale accanto a Milla.':action.kind==='carry'?'Milla conduce per attirare: verifica le nuove linee.':action.kind==='scenario'?`Stesso frame salvato / ${SCENES[b.scenario]}.`:action.kind==='press'?'Angolo di pressione aggiornato. Guarda anche ala ed esterno.':'Osserva le connessioni.');
+ if(action.releaseSupport){b.C[2].pinned=false;b.C[9].pinned=false}
+ assertState(b);const seg={a,b,action:clone(action),duration,ballDuration,from,to:pass?to:null,motionModel:'v10.1'};
+ if(action.tempo==='one-touch'&&pass){const short=Math.min(duration,ballDuration+.18),end=sampleSegment(seg,short);end.time=a.time+short;end.label=b.label;seg.b=end;seg.duration=short}
+ return seg;
+}
+function sampleSegment(seg,t){
+ if(t<=0)return clone(seg.a);if(t>=seg.duration)return clone(seg.b);
+ const s=clone(seg.a),u=clamp(t/seg.duration,0,1);
+ for(const key of ['pivot','scenario','pressing','decision','millaDrop','nicoShift','label','action'])s[key]=seg.b[key];
+ for(const key of ['C','T'])s[key].forEach((p,i)=>{const a=seg.a[key][i],b=seg.b[key][i],modern=seg.motionModel==='v10.1';let delay=key==='T'&&seg.b.scenario==='followMilla'&&[6,8].includes(i)?.32:key==='T'&&[1,2,3,4,5].includes(i)?(modern?.14:.08):modern?(key==='T'?[9,10].includes(i)?.03:.07:i===9?.1:i===6?.03:0):0;const phase=clamp((u-delay)/(1-delay),0,1),v=modern?smooth(phase):ease(phase),pt=modern?movementPoint(a,b,key,i,v):{x:mix(a.x,b.x,v),y:mix(a.y,b.y,v)};p.x=pt.x;p.y=pt.y;p.tx=b.x;p.ty=b.y;let da=Math.atan2(Math.sin(b.angle-a.angle),Math.cos(b.angle-a.angle));p.angle=a.angle+da*v;p.pinned=b.pinned});
+ if(seg.to!==null){const progress=clamp(t/seg.ballDuration,0,1);if(progress<1){s.owner=seg.from;s.flight={from:seg.from,to:seg.to,start:ballPos(seg.a),end:{x:s.C[seg.to].x,y:s.C[seg.to].y},progress}}else{s.owner=seg.to;s.flight=null}}
+ s.time=seg.a.time+t;return s;
+}
+function compile(start,actions){let current=clone(start),total=0;const segments=[];for(const action of actions){if(action.kind==='pass'&&action.to===current.owner)continue;const s=segment(current,action);s.at=total;segments.push(s);total+=s.duration;current=clone(s.b)}return{start:clone(start),segments,duration:total,end:current}}
+function sampleClip(clip,t){if(!clip.segments.length)return clone(clip.start);t=clamp(t,0,clip.duration);const seg=clip.segments.find(s=>t<s.at+s.duration-1e-9)||clip.segments.at(-1);return sampleSegment(seg,t-seg.at)}
+function pushHistory(){const snap=clone(S);if(JSON.stringify(history[historyIndex])===JSON.stringify(snap))return;history=history.slice(0,historyIndex+1);history.push(snap);if(history.length>100)history.shift();historyIndex=history.length-1}
+function begin(actions,mode='manual',start=S){
+ if(start.flight){feedback('Completa o riprendi il passaggio in corso prima di una nuova azione.');return false}
+ if(!actions.every(a=>a.kind==='scenario'||a.kind==='press'))comparisonBase=null;
+ controller.pendingScenario=null;
+ if(mode==='manual')pushHistory();
+ controller.clip=compile(start,actions);controller.elapsed=0;controller.mode=mode;controller.status=controller.clip.duration?'running':'idle';controller.stepEnd=null;S=clone(start);last=performance.now();dirty=uiDirty=true;return true;
+}
+function feedback(str){S.label=str;uiDirty=true;dirty=true}
+function passTo(id){if(!Number.isInteger(id)||id<0||id>10||id===S.owner||S.flight)return false;return begin([{kind:'pass',to:id}])}
+function manualAction(action){if(S.flight)return feedback('La palla è in volo: pausa o riprendi prima di scegliere una nuova azione.');begin([action])}
+function guidedActions(){return[{kind:'pivot',value:true,resetDefence:true,label:'Costruzione corretta: Perrone si abbassa, i due esterni danno ampiezza.'},...[1,4,1,2,3,5,3,2].map(to=>({kind:'pass',to})),{kind:'scenario',value:'followMilla',label:'Ora l’errore: Bragança segue Milla, le mezzali escono alte. Nico cambia posizione e apre la linea. Sequenza ferma: scegli il passaggio.'}]}
+function loadGuided(autostart=false){if(S.flight)return feedback('Riprendi il passaggio prima di avviare una nuova sequenza.');controller.clip=compile(S,guidedActions());controller.elapsed=0;controller.mode='guided';controller.status=autostart?'running':'paused';controller.stepEnd=null;last=performance.now();dirty=uiDirty=true}
+function togglePlay(){
+ if(controller.status==='running'){controller.status='paused';controller.stepEnd=null}
+ else if(controller.clip&&controller.elapsed<controller.clip.duration-1e-8){controller.status='running';last=performance.now()}
+ else if(controller.mode==='guided'&&controller.clip){controller.elapsed=0;S=sampleClip(controller.clip,0);controller.status='running';last=performance.now()}
+ else loadGuided(true);
+ dirty=uiDirty=true;
+}
+function seek(time){if(controller.mode!=='guided'||!controller.clip)return;controller.elapsed=clamp(time,0,controller.clip.duration);S=sampleClip(controller.clip,controller.elapsed);controller.status='paused';controller.stepEnd=null;dirty=uiDirty=true}
+function reset(){S=initial();controller={mode:'manual',status:'idle',clip:null,elapsed:0,speed:controller.speed,stepEnd:null,pendingScenario:null};comparisonBase=null;history=[clone(S)];historyIndex=0;selected=null;showLines=true;dirty=uiDirty=true}
+function step(dir){
+ if(controller.mode==='manual'){if(controller.status==='running'||controller.status==='paused'&&controller.clip&&controller.elapsed<controller.clip.duration){controller.status='idle';S=clone(history[historyIndex]);controller.clip=null;controller.elapsed=0;if(dir>0&&historyIndex<history.length-1)S=clone(history[++historyIndex])}else{historyIndex=clamp(historyIndex+dir,0,history.length-1);S=clone(history[historyIndex]);controller.clip=null;controller.elapsed=0}dirty=uiDirty=true;return}
+ const c=controller.clip;if(!c)return;const boundaries=[0,...c.segments.map(s=>s.at+s.duration)];if(dir<0)seek([...boundaries].reverse().find(t=>t<controller.elapsed-.01)??0);else{const next=boundaries.find(t=>t>controller.elapsed+.01);if(next!==undefined){controller.stepEnd=next;controller.status='running';last=performance.now();dirty=uiDirty=true}}
+}
+function savePoint(){checkpoint=freeze({state:clone(S),clip:clone(controller.clip),elapsed:controller.elapsed,mode:controller.mode,texts:clone(texts)});comparisonBase=null;snapshotSerial++;comparisonRuns={};feedback(`Posizione #${snapshotSerial} salvata. Le varianti partono da questo frame.`);uiDirty=true}
+function restorePoint(){if(!checkpoint){if(comparisonBase){S=clone(comparisonBase);controller.clip=null;controller.elapsed=0;controller.mode='manual';controller.status='idle';controller.stepEnd=null;controller.pendingScenario=null;selected=null;dirty=uiDirty=true}return}S=clone(checkpoint.state);texts=clone(checkpoint.texts);syncEditors();controller.clip=clone(checkpoint.clip);controller.elapsed=checkpoint.elapsed;controller.mode=checkpoint.mode;controller.status=controller.clip&&controller.elapsed<controller.clip.duration?'paused':'idle';controller.stepEnd=null;controller.pendingScenario=null;selected=null;dirty=uiDirty=true}
+function runScenario(value){
+ if(!Object.hasOwn(SCENES,value))return false;showLines=true;
+ if(S.flight){const clip=controller.clip,seg=clip?.segments.find(s=>controller.elapsed<s.at+s.duration)||clip?.segments.at(-1);if(seg){controller.elapsed-=seg.at;controller.clip={start:clone(seg.a),segments:[{...clone(seg),at:0}],duration:seg.duration,end:clone(seg.b)}}controller.mode='manual';controller.pendingScenario=value;feedback(`${SCENES[value]} selezionato: confronto dopo la ricezione${controller.status==='paused'?' · Riprendi il passaggio':''}.`);return true}
+ let base=checkpoint&&!checkpoint.state.flight?checkpoint.state:comparisonBase;
+ if(!base){comparisonBase=freeze(clone(S));base=comparisonBase;comparisonRuns={}}
+ S=clone(base);lastComparisonStart=clone(S);selected={key:'T',id:7};begin([{kind:'scenario',value}],'manual',S);comparisonRuns[value]={start:clone(S),end:clone(controller.clip.end)};return true;
+}
+function tick(now){
+ const dt=last?clamp((now-last)/1000,0,.1):0;last=now;
+ if(controller.status==='running'&&controller.clip){const limit=controller.stepEnd??controller.clip.duration;controller.elapsed=Math.min(limit,controller.elapsed+dt*controller.speed);S=sampleClip(controller.clip,controller.elapsed);assertState(S);dirty=true;if(controller.elapsed>=limit-1e-9){controller.status=limit<controller.clip.duration-1e-8?'paused':'completed';controller.stepEnd=null;if(controller.mode==='manual')pushHistory();uiDirty=true;if(controller.pendingScenario&&controller.status==='completed'){const pending=controller.pendingScenario;controller.pendingScenario=null;runScenario(pending)}}}
+ if(dirty){renderField();dirty=false}if(uiDirty||now-lastUI>=100&&controller.status==='running'){renderUI();lastUI=now;uiDirty=false}requestAnimationFrame(tick);
+}
+const node=(tag,attrs={})=>{const el=document.createElementNS(NS,tag);for(const[k,v]of Object.entries(attrs))el.setAttribute(k,v);return el};
+const xy=p=>[40+p.x*10,30+p.y*10];
+for(const [kind,color]of Object.entries({...COLORS,pass:'#226c95'})){const marker=node('marker',{id:'arrow-'+kind,viewBox:'0 0 10 10',refX:9,refY:5,markerWidth:5,markerHeight:5,orient:'auto-start-reverse',markerUnits:'strokeWidth'});marker.append(node('path',{d:'M1 1L9 5L1 9',fill:'none',stroke:color,'stroke-width':1.5,'stroke-linejoin':'round'}));$('field').querySelector('defs').append(marker)}
+
+const coverControls=document.createElement('div');coverControls.id='coverControls';coverControls.hidden=true;const coverTitle=document.createElement('div');coverTitle.className='notice';coverTitle.id='coverTitle';coverControls.append(coverTitle);const coverOptions=document.createElement('div');coverOptions.className='options';for(const [key,label]of [['correct','Chiude diagonale'],['late','Non compensa']]){const button=document.createElement('button');button.dataset.cover=key;button.textContent=label;button.onclick=()=>manualAction({kind:'press',value:key==='correct'?'correct':ballPos().y>34?'badFj':'badVl'});coverOptions.append(button)}coverControls.append(coverOptions);$('coverSlot').append(coverControls);
+const playerNodes=[];
+for(const key of ['T','C'])for(const p of S[key]){const g=node('g',{class:'p',tabindex:'0',role:'button','aria-label':`${p.name} · ${p.role} · ${key==='C'?'Como, clic per passare':'Torino, trascina'}`,'data-team':key,'data-id':p.id});g.append(node('circle',{r:23,fill:'transparent',class:'hit'}),node('circle',{class:'ring',r:21}),node('circle',{class:'token',r:p.id===0?16:14.5,fill:key==='C'?'#226c95':'#854358'}));const t=node('text',{class:'initial'});t.style.fontSize='11px';t.textContent=p.id===0?'GK':key==='C'?['','K','P','R','V','C','M','7','8','10','9'][p.id]:['','C','I','CO','B','CA','VL','BR','FJ','A','S'][p.id];const name=node('text',{class:'name',y:-28});name.style.fontSize='12px';name.textContent=p.name;g.append(t,name);$('players').append(g);playerNodes.push({g,key,id:p.id});g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.stopPropagation();if(key==='C')passTo(p.id);selected={key,id:p.id};dirty=true}})}
+function renderField(){
+ $('field').classList.toggle('names',showNames);for(const n of playerNodes){const p=S[n.key][n.id];n.g.setAttribute('transform',`translate(${xy(p).join(' ')})`);n.g.classList.toggle('selected',selected?selected.key===n.key&&selected.id===n.id:n.key==='C'&&n.id===S.owner)}
+ const b=xy(ballPos());for(const id of ['ball','ballDot']){$(id).setAttribute('cx',b[0]);$(id).setAttribute('cy',b[1])}
+ // Geometry follows every frame; classification is cached independently (<= 10 Hz).
+ renderLanes();
+ $('zoneLayer').replaceChildren();if(showZones){const z=node('ellipse',{cx:40+(S.scenario==='followNico'&&S.decision?48.8:64)*10,cy:365,rx:62,ry:32,fill:'#187359','fill-opacity':'.08',stroke:'#688875','stroke-dasharray':'4 7','stroke-width':1});$('zoneLayer').append(z)}
+ $('motionLayer').replaceChildren();
+ const seg=controller.clip?.segments.find(s=>controller.elapsed<s.at+s.duration)||controller.clip?.segments.at(-1);
+ if(showArrows&&seg)for(const key of ['C','T'])for(const p of S[key]){const a=seg.a[key][p.id],end=seg.b[key][p.id],moved=dist(a,p);if(dist(a,end)<.35||moved<.05)continue;const from=xy(a),to=xy(p),c=xy(movementControl(a,p,key,p.id)),color=key==='C'?'#426b81':'#854358';$('motionLayer').append(node('path',{d:`M${from[0]} ${from[1]}Q${c[0]} ${c[1]} ${to[0]} ${to[1]}`,class:'motion-trace',stroke:color}));if(key==='T'&&p.id===7||key==='C'&&[6,9].includes(p.id)){$('motionLayer').append(node('circle',{cx:from[0],cy:from[1],r:14,fill:'none',stroke:color,'stroke-width':1.4,'stroke-dasharray':'3 4',opacity:.36}));}}
+}
+function renderLanes(force=false){
+ const key=S.owner+'/'+showAll;if(force||uiDirty||renderLanes.key!==key||renderLanes.time===undefined||Math.abs(S.time-renderLanes.time)>=.1){renderLanes.current=salient();renderLanes.key=key;renderLanes.time=S.time}
+ const list=renderLanes.current,ids=showLines?list.map(l=>l.id).join(','):'';
+ if($('laneLayer').dataset.ids!==ids){$('laneLayer').replaceChildren();if(showLines)for(const l of list)$('laneLayer').append(node('path',{'data-to':l.id}));$('laneLayer').dataset.ids=ids}
+ if(showLines)for(const l of list){const path=$('laneLayer').querySelector(`[data-to="${l.id}"]`),a=xy(S.C[S.owner]),b=xy(S.C[l.id]),dx=b[0]-a[0],dy=b[1]-a[1],d=Math.hypot(dx,dy)||1;path.setAttribute('d',`M${a[0]+dx/d*19} ${a[1]+dy/d*19}L${b[0]-dx/d*20} ${b[1]-dy/d*20}`);path.setAttribute('class',`lane-path ${l.kind}`);path.setAttribute('stroke',COLORS[l.kind]);path.setAttribute('data-kind',l.kind);path.setAttribute('marker-end',`url(#arrow-${l.kind})`)}
+ let active=$('laneLayer').querySelector('.active-pass');if(S.flight&&showLines){if(!active){active=node('path',{class:'active-pass','marker-end':'url(#arrow-pass)'});$('laneLayer').append(active)}const a=xy(S.flight.start),b=xy(S.flight.end);active.setAttribute('d',`M${a[0]} ${a[1]}L${b[0]} ${b[1]}`)}else active?.remove();
+}
+function formatTime(t){return `${String(Math.floor(t/60)).padStart(2,'0')}:${(t%60).toFixed(1).padStart(4,'0')}`}
+function renderUI(){
+ $('pageTitle').textContent=TITLE;$('mode').value=controller.mode;
+ const running=controller.status==='running',pending=controller.clip&&controller.elapsed<controller.clip.duration-1e-8;
+ $('playPause').textContent=running?'Ⅱ Pausa':pending?'▶ Riprendi':'▶ Avvia';$('playPause').setAttribute('aria-label',running?'Pausa':pending?'Riprendi':'Avvia');
+ $('time').textContent=formatTime(controller.mode==='guided'?controller.elapsed:S.time);
+ $('timeline').disabled=controller.mode!=='guided';$('timeline').value=controller.mode==='guided'&&controller.clip?Math.round(controller.elapsed/controller.clip.duration*1000):0;$('speed').textContent=controller.speed+'×';
+ $('prev').disabled=controller.mode==='manual'&&historyIndex===0&&!pending;$('next').disabled=controller.mode==='manual'?historyIndex>=history.length-1:!controller.clip||controller.elapsed>=controller.clip.duration;
+ $('restorePoint').disabled=!checkpoint&&!comparisonBase;$('savePoint').setAttribute('aria-pressed',!!checkpoint);
+ document.querySelectorAll('[data-scenario]').forEach(el=>{const active=el.dataset.scenario===(controller.pendingScenario||S.scenario);el.classList.toggle('active',active);el.setAttribute('aria-pressed',active)});
+ const trap=wideTrap(S,ballPos(S));$('coverControls').hidden=!trap;if(trap){$('coverTitle').textContent=S.T[trap.mid].name;document.querySelectorAll('[data-cover]').forEach(b=>{b.disabled=!!S.flight;b.setAttribute('aria-pressed',b.dataset.cover===(trap.bad?'late':'correct'))})}
+ $('millaActions').hidden=S.owner!==6;if(S.owner!==6)$('millaActions').open=false;
+ document.querySelectorAll('[data-action]').forEach(el=>el.disabled=S.owner!==6||!!S.flight);
+ $('pivotBtn').textContent=S.pivot?'Perrone mediano':'Perrone basso';$('pressing').value=S.pressing;
+ for(const[id,value]of [['lanesToggle',showLines],['zonesToggle',showZones],['namesToggle',showNames]])$(id).setAttribute('aria-pressed',value);
+ renderLanes(true);
+ $('liveState').textContent=`${S.C[S.owner].name}. ${running?'In movimento':controller.status==='paused'?'In pausa':'Fermo'}. ${SCENES[S.scenario]}.`;
+}
+function syncEditors(){texts={title:TITLE,caption:'',source:''}}
+
+function envelope(){return{format:'FIELDNOTES',version:10,simulation:true,parameters:PARAM,texts:clone(texts),state:clone(S),playback:clone(controller),checkpoint:clone(checkpoint),comparisonBase:clone(comparisonBase),snapshotSerial,comparisons:clone(comparisonRuns),history:clone(history),historyIndex,layers:{showLines,showZones,showNames,showAll,showArrows}}}
+// Import whitelists every field; roster identity and model parameters never come from HTML or input.
+function cleanState(raw){if(!raw||!Array.isArray(raw.C)||!Array.isArray(raw.T))throw Error('Snapshot mancante');const s=initial();for(const key of ['C','T']){if(raw[key].length!==11)throw Error('Servono 11 giocatori per squadra');s[key]=s[key].map((p,i)=>{const q=raw[key][i];for(const k of ['x','y','tx','ty','angle']){if(typeof q[k]!=='number'||!Number.isFinite(q[k]))throw Error('Coordinata non valida');p[k]=q[k]}p.pinned=q.pinned===true;return p})}
+ for(const k of ['owner','time','scenario','pressing'])s[k]=raw[k];for(const k of ['pivot','decision','millaDrop','nicoShift'])s[k]=raw[k]===true;s.label=String(raw.label??'').slice(0,800);s.action=['idle','pass','pivot','carry','scenario','press','wait','support'].includes(raw.action)?raw.action:'idle';if(raw.flight)s.flight={from:raw.flight.from,to:raw.flight.to,start:{x:raw.flight.start?.x,y:raw.flight.start?.y},end:{x:raw.flight.end?.x,y:raw.flight.end?.y},progress:raw.flight.progress};assertState(s);return s}
+function cleanTexts(){return{title:TITLE,caption:'',source:''}}
+function cleanClip(r){
+ if(!r)return null;if(!Array.isArray(r.segments)||r.segments.length>80)throw Error('Timeline troppo lunga');const start=cleanState(r.start),segments=[];let at=0,previous=start;
+ for(const z of r.segments){
+  if(!Number.isFinite(z.duration)||z.duration<.05||z.duration>120||!Number.isFinite(z.ballDuration)||z.ballDuration<0||z.ballDuration>z.duration)throw Error('Durata non valida');
+  const a=cleanState(z.a),b=cleanState(z.b);if(JSON.stringify(a)!==JSON.stringify(previous)||a.flight||Math.abs(b.time-a.time-z.duration)>1e-6)throw Error('Timeline discontinua');
+  if(z.to!==null&&(!Number.isInteger(z.to)||z.to<0||z.to>10||z.from!==a.owner||z.to===a.owner||b.owner!==z.to||z.ballDuration<=0)||z.to===null&&b.owner!==a.owner)throw Error('Passaggio non valido');
+  const action={kind:b.action};if(z.to!==null)action.to=z.to;
+  if(z.action&&Object.hasOwn(z.action,'value')){const v=z.action.value;if(b.action==='pivot'&&typeof v==='boolean'||b.action==='scenario'&&Object.hasOwn(SCENES,v)||b.action==='press'&&['correct','badVl','badFj'].includes(v))action.value=v;else throw Error('Azione non valida')}
+  if(typeof z.action?.label==='string')action.label=z.action.label.slice(0,800);if(Number.isFinite(z.action?.duration))action.duration=z.duration;
+  if(z.action?.resetDefence===true)action.resetDefence=true;if(z.action?.tempo==='one-touch')action.tempo='one-touch';if(z.action?.releaseSupport===true)action.releaseSupport=true;
+  const seg={a,b,action,duration:z.duration,ballDuration:z.ballDuration,from:a.owner,to:z.to,at};if(z.motionModel==='v10.1')seg.motionModel='v10.1';segments.push(seg);at+=z.duration;previous=b;
+ }
+ return{start,segments,duration:at,end:segments.at(-1)?.b??start};
+}
+function importProject(input){
+ const r=typeof input==='string'?JSON.parse(input):input;if(r?.format!=='FIELDNOTES'||r.version!==10)throw Error('Formato FIELDNOTES V10 richiesto');const state=cleanState(r.state),clip=cleanClip(r.playback?.clip);const elapsed=Number(r.playback?.elapsed??0);if(!Number.isFinite(elapsed)||elapsed<0||clip&&elapsed>clip.duration+.001)throw Error('Posizione timeline non valida');
+ let cp=null;if(r.checkpoint){const c=r.checkpoint,cc=cleanClip(c.clip),ce=Number(c.elapsed);if(!Number.isFinite(ce)||ce<0||cc&&ce>cc.duration+.001)throw Error('Snapshot non valido');cp=freeze({state:cleanState(c.state),clip:cc,elapsed:ce,mode:c.mode==='guided'?'guided':'manual',texts:cleanTexts(c.texts)})}
+ const checkFrame=(s,c,t)=>{if(!c)return;const f=sampleClip(c,t);if(s.owner!==f.owner||Math.abs(s.time-f.time)>1e-6||JSON.stringify(s.flight)!==JSON.stringify(f.flight))throw Error('Frame e timeline non corrispondono');for(const key of ['C','T'])s[key].forEach((p,i)=>{for(const k of ['x','y','tx','ty','angle'])if(Math.abs(p[k]-f[key][i][k])>1e-6)throw Error('Frame e timeline non corrispondono')})};checkFrame(state,clip,elapsed);if(cp)checkFrame(cp.state,cp.clip,cp.elapsed);
+ const cb=r.comparisonBase?freeze(cleanState(r.comparisonBase)):null;if(cb?.flight)throw Error('Base confronto con palla in volo');
+ const hist=Array.isArray(r.history)&&r.history.length&&r.history.length<=100?r.history.map(cleanState):[clone(state)],index=Number.isInteger(r.historyIndex)?clamp(r.historyIndex,0,hist.length-1):hist.length-1;
+ const runs={};for(const key of Object.keys(SCENES))if(r.comparisons?.[key])runs[key]={start:cleanState(r.comparisons[key].start),end:cleanState(r.comparisons[key].end)};
+ if(r.layers)for(const k of ['showLines','showZones','showNames','showAll','showArrows'])if(typeof r.layers[k]!=='boolean')throw Error('Layer non valido');
+ // Commit only after complete validation, so rejected imports leave the session intact.
+ S=state;texts=cleanTexts(r.texts);controller={mode:r.playback?.mode==='guided'?'guided':'manual',status:clip&&elapsed<clip.duration?'paused':'idle',clip,elapsed,speed:[.5,1,1.5].includes(r.playback?.speed)?r.playback.speed:1,stepEnd:null,pendingScenario:Object.hasOwn(SCENES,r.playback?.pendingScenario)?r.playback.pendingScenario:null};checkpoint=cp;comparisonBase=cb;history=hist;historyIndex=index;comparisonRuns=runs;snapshotSerial=clamp(Number(r.snapshotSerial)||0,0,999999);
+ if(r.layers){({showLines,showZones,showNames,showAll,showArrows}=r.layers)}$('allLanes').checked=showAll;$('arrows').checked=showArrows;syncEditors();selected=null;dirty=uiDirty=true;return true;
+}
+function download(blob,name){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+function exportJSON(){download(new Blob([JSON.stringify(envelope(),null,2)],{type:'application/json'}),'COMO_V2_progetto.json')}
+function drawWrapped(ctx,text,x,y,width,lineHeight,maxLines){
+ const lines=[];let line='';for(const word of text.split(/\s+/)){const next=line?line+' '+word:word;if(ctx.measureText(next).width<=width){line=next;continue}if(line){lines.push(line);line=''}for(const char of word){if(ctx.measureText(line+char).width>width&&line){lines.push(line);line=''}line+=char}}if(line)lines.push(line);
+ const visible=lines.slice(0,maxLines);if(lines.length>maxLines){let end=visible[maxLines-1];while(end&&ctx.measureText(end+'…').width>width)end=end.slice(0,-1);visible[maxLines-1]=end+'…'}visible.forEach((l,i)=>ctx.fillText(l,x,y+i*lineHeight));return visible.length*lineHeight;
+}
+async function exportPNG(editorial=false){
+ renderField();const copy=$('field').cloneNode(true);copy.querySelectorAll('.motion-distance').forEach(el=>el.remove());copy.setAttribute('xmlns',NS);copy.setAttribute('width','1130');copy.setAttribute('height','740');const style=node('style');style.textContent='.mark{stroke:#fff;stroke-width:1.5;fill:none}.token{stroke:#fff;stroke-width:2}.ring{fill:none;stroke:#233a30;stroke-width:1.5;opacity:0}.selected .ring{opacity:1}.initial{font:700 9px Segoe UI,Arial,sans-serif;fill:#fff;text-anchor:middle;dominant-baseline:central}.name{font:600 10px Segoe UI,Arial,sans-serif;fill:#213a2c;paint-order:stroke;stroke:#edf3e9;stroke-width:5px;stroke-linejoin:round;text-anchor:middle;display:none}.names .name{display:block}.lane-path{fill:none;stroke-width:2;opacity:.75;stroke-dasharray:9 5}.blocked{stroke-dasharray:3 5;stroke-width:2.4}.risk{stroke-dasharray:7 5}';copy.prepend(style);
+ style.textContent+='.lane-path{stroke-width:2.4;opacity:.9;vector-effect:non-scaling-stroke}.lane-path.free{stroke-dasharray:none}.lane-path.blocked{stroke-dasharray:2 5}.active-pass{fill:none;stroke:#226c95;stroke-width:3}.motion-trace{fill:none;stroke-width:1.7;stroke-dasharray:4 4;opacity:.5}.motion-distance{font:11px Segoe UI,Arial;fill:#713c50;paint-order:stroke;stroke:#edf3e9;stroke-width:4px}';
+ const url=URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(copy)],{type:'image/svg+xml;charset=utf-8'}));try{const img=new Image();await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=()=>reject(Error('Impossibile esportare il campo'));img.src=url});const canvas=document.createElement('canvas');canvas.width=editorial?1080:2260;canvas.height=editorial?1350:1480;const g=canvas.getContext('2d');g.fillStyle=editorial?'#f6f6f2':'#e2ebdf';g.fillRect(0,0,canvas.width,canvas.height);
+ if(editorial){g.fillStyle='#202e29';g.font='600 38px Segoe UI,Arial';drawWrapped(g,TITLE,48,90,984,46,2);g.fillStyle='#e2ebdf';g.fillRect(24,320,1032,676);g.drawImage(img,24,320,1032,676)}else g.drawImage(img,0,0,2260,1480);
+ const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));if(!blob)throw Error('PNG vuoto');download(blob,editorial?'COMO_V2_frame.png':'COMO_V2_campo.png');return{width:canvas.width,height:canvas.height,bytes:blob.size};
+ }finally{URL.revokeObjectURL(url)}
+}
+function handleError(err){feedback('Operazione non completata: '+err.message)}
+// Pointer handling: dragging pauses time first; clicks never resume a paused flight.
+function eventPoint(e){const pt=$('field').createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;return pt.matrixTransform($('field').getScreenCTM().inverse())}
+for(const n of playerNodes)n.g.addEventListener('pointerdown',e=>{if(view==='present')return;const pt=eventPoint(e);drag={key:n.key,id:n.id,start:pt,moved:false,was:clone(S)};selected={key:n.key,id:n.id};n.g.setPointerCapture(e.pointerId);dirty=true});
+$('field').addEventListener('pointermove',e=>{if(!drag)return;const pt=eventPoint(e);if(!drag.moved&&Math.hypot(pt.x-drag.start.x,pt.y-drag.start.y)>7){if(S.flight){feedback('Palla in volo: completa il passaggio prima di trascinare.');return}drag.moved=true;controller.status='idle';controller.mode='manual';controller.clip=null;controller.elapsed=0}if(drag.moved){const p=S[drag.key][drag.id];p.x=p.tx=clamp((pt.x-40)/10,1,104);p.y=p.ty=clamp((pt.y-30)/10,1,67);p.pinned=true;assertState(S);dirty=uiDirty=true}});
+$('field').addEventListener('pointerup',()=>{if(!drag)return;const d=drag;drag=null;if(d.moved){S.label=`${S[d.key][d.id].name} riposizionato. Annulla per recuperare il frame precedente.`;pushHistory();dirty=uiDirty=true}else if(d.key==='C')passTo(d.id)});
+$('field').addEventListener('pointercancel',()=>{if(drag?.moved){S=drag.was;dirty=uiDirty=true}drag=null});
+$('playPause').onclick=togglePlay;$('reset').onclick=reset;$('prev').onclick=()=>step(-1);$('next').onclick=()=>step(1);$('timeline').oninput=e=>seek(Number(e.target.value)/1000*controller.clip.duration);$('mode').onchange=e=>{if(e.target.value==='guided')loadGuided(false);else{controller.mode='manual';controller.stepEnd=null;if(S.flight&&controller.clip){const seg=controller.clip.segments.find(s=>controller.elapsed<s.at+s.duration)||controller.clip.segments.at(-1);controller.elapsed-=seg.at;controller.clip={start:clone(seg.a),segments:[{...clone(seg),at:0}],duration:seg.duration,end:clone(seg.b)}}else{controller.status='idle';controller.clip=null;controller.elapsed=0;pushHistory()}dirty=uiDirty=true}};
+$('speed').onclick=()=>{controller.speed=controller.speed===1?1.5:controller.speed===1.5?.5:1;uiDirty=true};$('savePoint').onclick=savePoint;$('restorePoint').onclick=restorePoint;
+document.querySelectorAll('[data-scenario]').forEach(b=>b.onclick=()=>runScenario(b.dataset.scenario));
+
+$('pivotBtn').onclick=()=>{manualAction({kind:'pivot'});$('tools').open=false};$('prepare').onclick=()=>{if(S.flight)return feedback('Completa prima il passaggio.');begin([{kind:'pivot',value:true},{kind:'pass',to:2},{kind:'pass',to:3},{kind:'pass',to:2}],'guided');feedback('Preparazione a Perrone: al termine premi Salva posizione.');$('tools').open=false};$('pressing').onchange=e=>manualAction({kind:'press',value:e.target.value});
+document.querySelectorAll('[data-action]').forEach(b=>b.onclick=()=>{if(S.owner!==6||S.flight)return;const a=b.dataset.action;if(a==='nico')passTo(9);if(a==='back')passTo(2);if(a==='wide')passTo(S.C[6].y<34?7:8);if(a==='carry')manualAction({kind:'carry'});if(a==='third')begin([{kind:'support',label:'Perrone viene incontro per la sponda; Nico si smarca su un nuovo corridoio.'},{kind:'pass',to:2,tempo:'one-touch',label:'Milla appoggia a Perrone: sponda di prima, Nico continua lo smarcamento.'},{kind:'pass',to:9,releaseSupport:true,label:'Perrone cerca Nico, terzo uomo dopo la sponda di Milla.'}])});
+for(const[id,setter]of [['lanesToggle',()=>showLines=!showLines],['zonesToggle',()=>showZones=!showZones],['namesToggle',()=>showNames=!showNames]])$(id).onclick=()=>{setter();dirty=uiDirty=true};$('allLanes').onchange=e=>{showAll=e.target.checked;dirty=uiDirty=true};$('arrows').onchange=e=>{showArrows=e.target.checked;dirty=uiDirty=true};
+
+$('exportPitch').onclick=()=>exportPNG(false).catch(handleError);$('exportFrame').onclick=()=>exportPNG(true).catch(handleError);$('exportJson').onclick=exportJSON;$('importJson').onclick=()=>$('importFile').click();$('importFile').onchange=async e=>{try{const file=e.target.files[0];if(!file)return;if(file.size>2_000_000)throw Error('Limite JSON: 2 MB');importProject(await file.text())}catch(err){handleError(err)}finally{e.target.value=''}};
+$('saveLocal').onclick=()=>{try{localStorage.setItem('como-v2',JSON.stringify(envelope()));feedback('Progetto salvato sul dispositivo. Esporta JSON per conservarne una copia.')}catch(err){handleError(err)}};$('loadLocal').onclick=()=>{try{const raw=localStorage.getItem('como-v2');if(!raw)throw Error('Nessun progetto locale salvato');importProject(raw)}catch(err){handleError(err)}};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){selected=null;$('tools').open=false;$('millaActions').open=false;dirty=true;return}if(['INPUT','TEXTAREA','SELECT','BUTTON','SUMMARY'].includes(e.target.tagName)||e.target.isContentEditable)return;if(e.code==='Space'){e.preventDefault();togglePlay()}else if(e.key==='ArrowLeft'){e.preventDefault();step(-1)}else if(e.key==='ArrowRight'){e.preventDefault();step(1)}else if(e.key.toLowerCase()==='r')reset()});
+document.addEventListener('pointerdown',e=>{for(const id of ['tools','millaActions'])if(!$(id).contains(e.target))$(id).open=false});
+document.querySelectorAll('#millaActions button').forEach(b=>b.addEventListener('click',()=>{$('millaActions').open=false}));
+
+// Read-only diagnostics plus pure sampling/validation for reproducible acceptance tests.
+window.FIELDNOTES=Object.freeze({debug:()=>({state:clone(S),ball:ballPos(),controller:clone(controller),checkpoint:clone(checkpoint),lastComparisonStart:clone(lastComparisonStart),comparisonBase:clone(comparisonBase),historyIndex,historyLength:history.length,lanes:candidates(),texts:clone(texts),comparisons:clone(comparisonRuns)}),serialize:()=>clone(envelope()),importProject,sample:(time)=>controller.clip?sampleClip(controller.clip,time):clone(S),classify:(a,b,defenders)=>classify(a,b,defenders),validate:()=>assertState(S),parameters:Object.freeze(clone(PARAM))});
+assertState(S);renderField();renderUI();requestAnimationFrame(tick);
+})();
+</script></body></html>

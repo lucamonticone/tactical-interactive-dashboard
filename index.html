@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tactical Dashboard | Luca Monticone</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: white;
+  color: #222;
+  font: 16px/1.55 Arial, Helvetica, sans-serif;
+}
+.wrap {
+  max-width: 1060px;
+  margin: auto;
+  padding: 0 20px;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 24px !important;
+  padding-bottom: 24px !important;
+  border-bottom: 1px solid #e8e8e8;
+}
+header a { font-size: 14px; color: #555; }
+main { padding-top: 55px !important; padding-bottom: 90px !important; }
+h1 { font-size: 40px; margin: 0 0 36px; letter-spacing: -.8px; }
+h2 { font-size: 30px; margin: 0 0 20px; }
+.case {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 42px;
+  align-items: center;
+}
+svg { display: block; width: 100%; height: auto; }
+.meta { color: #666; font-size: 13px; margin-bottom: 10px; }
+ul { padding-left: 20px; margin: 0 0 25px; }
+li { margin-bottom: 8px; }
+a { color: #225e58; text-underline-offset: 4px; }
+.open { font-weight: bold; }
+footer {
+  border-top: 1px solid #eee;
+  padding-top: 20px !important;
+  padding-bottom: 30px !important;
+  color: #666;
+  font-size: 13px;
+}
+@media (max-width: 800px) {
+  h1 { font-size: 30px; margin-bottom: 25px; }
+  .case { grid-template-columns: 1fr; gap: 28px; }
+  main { padding-top: 35px !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <strong>Tactical Dashboard</strong>
+  <a href="https://github.com/lucamonticone/tactical-interactive-dashboard">GitHub</a>
+</header>
+
+<main class="wrap">
+  <h1>Football tactical analysis</h1>
+
+  <section class="case">
+    <svg viewBox="0 0 650 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Football tactical formation, Como versus Torino">
+      <defs>
+        <pattern id="grass" width="130" height="440" patternUnits="userSpaceOnUse">
+          <rect width="130" height="440" fill="#e2ebe4"/>
+          <rect width="65" height="440" fill="#d9e6dd"/>
+        </pattern>
+      </defs>
+      <rect width="650" height="440" fill="url(#grass)"/>
+      <g fill="none" stroke="white" stroke-width="2.4">
+        <rect x="14" y="14" width="622" height="412"/>
+        <path d="M325 14V426"/>
+        <circle cx="325" cy="220" r="64"/>
+        <rect x="14" y="124" width="100" height="192"/>
+        <rect x="536" y="124" width="100" height="192"/>
+        <rect x="14" y="169" width="42" height="102"/>
+        <rect x="594" y="169" width="42" height="102"/>
+      </g>
+      <g fill="#197c9d" stroke="white" stroke-width="3">
+        <circle cx="44" cy="220" r="11"/>
+        <circle cx="158" cy="78" r="11"/>
+        <circle cx="132" cy="166" r="11"/>
+        <circle cx="135" cy="274" r="11"/>
+        <circle cx="155" cy="365" r="11"/>
+        <circle cx="239" cy="188" r="11"/>
+        <circle cx="248" cy="266" r="11"/>
+        <circle cx="328" cy="78" r="11"/>
+        <circle cx="354" cy="210" r="11"/>
+        <circle cx="330" cy="357" r="11"/>
+        <circle cx="457" cy="220" r="11"/>
+      </g>
+      <g fill="#863a5c" stroke="white" stroke-width="3">
+        <circle cx="608" cy="220" r="11"/>
+        <circle cx="547" cy="61" r="11"/>
+        <circle cx="525" cy="134" r="11"/>
+        <circle cx="518" cy="220" r="11"/>
+        <circle cx="525" cy="306" r="11"/>
+        <circle cx="547" cy="379" r="11"/>
+        <circle cx="413" cy="120" r="11"/>
+        <circle cx="404" cy="220" r="11"/>
+        <circle cx="413" cy="321" r="11"/>
+        <circle cx="290" cy="171" r="11"/>
+        <circle cx="290" cy="276" r="11"/>
+      </g>
+      <circle cx="135" cy="274" r="16" fill="none" stroke="#264c55" stroke-width="2"/>
+      <circle cx="135" cy="274" r="3" fill="white"/>
+    </svg>
+
+    <div>
+      <p class="meta">Serie A · 2026/27 · First half</p>
+      <h2>Torino — Como</h2>
+      <ul>
+        <li>Como's 4-2-3-1 build-up</li>
+        <li>Perrone dropping from midfield</li>
+        <li>Torino defending in a 5-3-2</li>
+        <li>Pressing and defensive shifts</li>
+        <li>Nico Paz between the lines</li>
+        <li>Passing lanes and tactical alternatives</li>
+      </ul>
+      <a class="open" href="./Torino-Como26-27/tactical_view.html">
+        Open interactive tactical board →
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  Luca Monticone ·
+  <a href="https://github.com/lucamonticone">GitHub</a>
+</footer>
+
+</body>
+</html>

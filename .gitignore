@@ -1,0 +1,16 @@
+# Local environments and secrets
+.env
+.env.*
+!.env.example
+.venv/
+__pycache__/
+*.py[cod]
+node_modules/
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Large intermediate exports (adapt if they are actually needed by a study)
+*.tmp
+*.log
