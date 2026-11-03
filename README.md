@@ -12,8 +12,8 @@ I wanted to explore those situations rather than simply describe them. This repo
 
 ### 01 — Torino vs Como | 2026/27
 
-[**Open the interactive tactical board**](https://lucamonticone.github.io/tactical-interactive-dashboard/Torino-Como26-27/tactical_view.html) · [Website](https://lucamonticone.github.io/tactical-interactive-dashboard/)
-[**mobile version**](https://lucamonticone.github.io/tactical-interactive-dashboard/Torino-Como26-27/tactical_mobile.html)
+[**Open the interactive tactical board**](https://lucamonticone.github.io/tactical-interactive-dashboard/Torino-Como26-27/tactical_view.html) · [**mobile version**](https://lucamonticone.github.io/tactical-interactive-dashboard/Torino-Como26-27/tactical_mobile.html) · [Website](https://lucamonticone.github.io/tactical-interactive-dashboard/)
+
 
 A first-half tactical study focused on:
 
