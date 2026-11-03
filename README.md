@@ -1,6 +1,7 @@
 # Tactical Interactive Dashboard
 
 [![Website](https://img.shields.io/badge/Website-GitHub%20Pages-222?logo=github&logoColor=white)](https://lucamonticone.github.io/tactical-interactive-dashboard/)
+[mobile version](https://lucamonticone.github.io/tactical-interactive-dashboard/Torino-Como26-27/tactical_mobile.html)
 ![Built with](https://img.shields.io/badge/Built%20with-HTML%20%2B%20JavaScript-3b6b70)
 [![License](https://img.shields.io/badge/License-Noncommercial-79445b)](LICENSE.md)
 
